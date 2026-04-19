@@ -1,6 +1,6 @@
 # Open Course UI HCI
 
-Open Course UI HCI is a full-stack course platform built with a React + TypeScript frontend and a Node.js + Express + MongoDB backend. It supports authentication, course creation, collaborative lesson contributions, rich-text lesson editing, course browsing, profile pages, and discussion-oriented learning features.
+Open Course UI HCI is a full-stack course platform built with a React + TypeScript frontend and a Node.js + Express + MongoDB backend. It supports authentication, course creation, collaborative lesson contributions, rich-text lesson editing, course browsing, profile pages, and discussion-oriented learning features...
 
 ## Stack
 
