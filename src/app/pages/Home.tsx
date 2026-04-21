@@ -52,7 +52,7 @@ export function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
@@ -68,7 +68,7 @@ export function Home() {
             <div className="flex gap-4">
               <Link
                 to="/courses"
-                className="px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-medium text-blue-600 transition-colors hover:bg-blue-50 dark:bg-gray-900 dark:text-blue-300 dark:hover:bg-gray-800"
               >
                 Browse Courses
                 <ArrowRight className="w-4 h-4" />
@@ -87,12 +87,12 @@ export function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">Featured Courses</h2>
-            <p className="text-gray-600">Explore the latest courses from the platform</p>
+            <h2 className="mb-1 text-2xl font-bold text-gray-900 dark:text-white">Featured Courses</h2>
+            <p className="text-gray-600 dark:text-gray-300">Explore the latest courses from the platform</p>
           </div>
           <Link
             to="/courses"
-            className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+            className="flex items-center gap-1 font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
           >
             View all
             <ArrowRight className="w-4 h-4" />
@@ -120,8 +120,8 @@ export function Home() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-1">Recently Updated</h2>
-          <p className="text-gray-600 mb-6">See which courses were refreshed most recently</p>
+          <h2 className="mb-1 text-2xl font-bold text-gray-900 dark:text-white">Recently Updated</h2>
+          <p className="mb-6 text-gray-600 dark:text-gray-300">See which courses were refreshed most recently</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -141,15 +141,15 @@ export function Home() {
             </div>
           ) : (
             recentlyUpdated.map((course) => (
-              <div key={course._id} className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
+              <div key={course._id} className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-950/40">
                   <Clock3 className="h-5 w-5 text-blue-600" />
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-gray-900">{course.title}</h3>
-                <p className="mb-3 text-sm text-gray-600">
+                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">{course.title}</h3>
+                <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
                   Instructor: {course.instructor?.name || 'Unknown'}
                 </p>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   Last updated {new Date(course.updatedAt || course.createdAt).toLocaleDateString()}
                 </p>
               </div>

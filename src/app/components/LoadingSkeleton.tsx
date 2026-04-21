@@ -3,10 +3,10 @@ export function LoadingSkeleton({ count = 3, variant = 'card' }: { count?: numbe
     return (
       <>
         {Array.from({ length: count }).map((_, i) => (
-          <div key={i} className="bg-white rounded-lg p-4 animate-pulse">
-            <div className="h-4 bg-gray-200 rounded mb-2 w-3/4"></div>
-            <div className="h-3 bg-gray-100 rounded mb-3 w-full"></div>
-            <div className="h-3 bg-gray-100 rounded w-1/2"></div>
+          <div key={i} className="animate-pulse rounded-lg bg-white p-4 dark:bg-gray-900">
+            <div className="mb-2 h-4 w-3/4 rounded bg-gray-200 dark:bg-gray-700"></div>
+            <div className="mb-3 h-3 w-full rounded bg-gray-100 dark:bg-gray-800"></div>
+            <div className="h-3 w-1/2 rounded bg-gray-100 dark:bg-gray-800"></div>
           </div>
         ))}
       </>
@@ -16,15 +16,15 @@ export function LoadingSkeleton({ count = 3, variant = 'card' }: { count?: numbe
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 animate-pulse">
-          <div className="flex items-start gap-3 mb-4">
-            <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
+        <div key={i} className="animate-pulse rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
+          <div className="mb-4 flex items-start gap-3">
+            <div className="h-12 w-12 rounded-lg bg-gray-200 dark:bg-gray-700"></div>
             <div className="flex-1">
-              <div className="h-4 bg-gray-200 rounded mb-2 w-3/4"></div>
-              <div className="h-3 bg-gray-100 rounded w-full"></div>
+              <div className="mb-2 h-4 w-3/4 rounded bg-gray-200 dark:bg-gray-700"></div>
+              <div className="h-3 w-full rounded bg-gray-100 dark:bg-gray-800"></div>
             </div>
           </div>
-          <div className="h-10 bg-gray-200 rounded mt-4"></div>
+          <div className="mt-4 h-10 rounded bg-gray-200 dark:bg-gray-700"></div>
         </div>
       ))}
     </>

@@ -43,6 +43,18 @@ const lessonSchema = new mongoose.Schema(
         ref: 'Material',
       },
     ],
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    dislikes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
     resources: [
       {
         title: String,

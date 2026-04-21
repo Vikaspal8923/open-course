@@ -7,6 +7,8 @@ import {
   deleteCourse,
   enrollCourse,
   getInstructorCourses,
+  likeCourse,
+  dislikeCourse,
 } from '../controllers/courseController.js';
 import { protect } from '../middleware/auth.js';
 
@@ -21,5 +23,7 @@ router.put('/:id', protect, updateCourse);
 router.delete('/:id', protect, deleteCourse);
 
 router.post('/:id/enroll', protect, enrollCourse);
+router.post('/:id/like', protect, likeCourse);
+router.post('/:id/dislike', protect, dislikeCourse);
 
 export default router;

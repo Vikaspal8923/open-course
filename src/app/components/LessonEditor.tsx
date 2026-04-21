@@ -48,7 +48,7 @@ export function LessonEditor({
     editorProps: {
       attributes: {
         class:
-          'lesson-editor max-h-[320px] min-h-[220px] overflow-y-auto rounded-b-xl border border-t-0 border-gray-200 bg-white px-4 py-3 focus:outline-none',
+          'lesson-editor max-h-[320px] min-h-[220px] overflow-y-auto rounded-b-xl border border-t-0 border-gray-200 bg-white px-4 py-3 text-gray-900 caret-gray-900 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:caret-gray-100',
         'data-placeholder': placeholder,
       },
     },
@@ -93,13 +93,13 @@ export function LessonEditor({
   const getButtonClass = (active: boolean) =>
     `${toolbarButtonClass} ${
       active
-        ? 'border-blue-200 bg-blue-50 text-blue-700'
-        : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50'
+        ? 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-900/70 dark:bg-blue-950/50 dark:text-blue-300'
+        : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800'
     }`;
 
   return (
     <div className="overflow-hidden rounded-xl">
-      <div className="flex flex-wrap gap-2 rounded-t-xl border border-gray-200 bg-gray-50 p-3">
+      <div className="flex flex-wrap gap-2 rounded-t-xl border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800">
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}

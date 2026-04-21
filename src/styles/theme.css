@@ -196,6 +196,20 @@
     pointer-events: none;
   }
 
+  .lesson-editor {
+    color: #111827;
+    caret-color: #111827;
+  }
+
+  .dark .lesson-editor {
+    color: #f3f4f6;
+    caret-color: #f3f4f6;
+  }
+
+  .dark .lesson-editor p.is-editor-empty:first-child::before {
+    color: #6b7280;
+  }
+
   .lesson-editor ul,
   .lesson-rich-content ul {
     list-style: disc;
@@ -216,12 +230,22 @@
     text-decoration: underline;
   }
 
+  .dark .lesson-editor a,
+  .dark .lesson-rich-content a {
+    color: #60a5fa;
+  }
+
   .lesson-editor table,
   .lesson-rich-content table {
     margin: 1rem 0;
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #d1d5db;
+  }
+
+  .dark .lesson-editor table,
+  .dark .lesson-rich-content table {
+    border-color: #374151;
   }
 
   .lesson-editor th,
@@ -238,6 +262,18 @@
   .lesson-rich-content th {
     background: #eff6ff;
     font-weight: 600;
+  }
+
+  .dark .lesson-editor th,
+  .dark .lesson-editor td,
+  .dark .lesson-rich-content th,
+  .dark .lesson-rich-content td {
+    border-color: #374151;
+  }
+
+  .dark .lesson-editor th,
+  .dark .lesson-rich-content th {
+    background: #172554;
   }
 
   .lesson-rich-content p {

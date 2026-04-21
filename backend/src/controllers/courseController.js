@@ -2,6 +2,29 @@ import Course from '../models/Course.js';
 import User from '../models/User.js';
 import '../models/Material.js';
 
+const toggleReaction = async (courseId, userId, reactionType) => {
+  const course = await Course.findById(courseId);
+
+  if (!course) {
+    return null;
+  }
+
+  const targetField = reactionType === 'like' ? 'likes' : 'dislikes';
+  const oppositeField = reactionType === 'like' ? 'dislikes' : 'likes';
+  const hasReaction = course[targetField].some((entry) => entry.toString() === userId);
+
+  course[oppositeField] = course[oppositeField].filter((entry) => entry.toString() !== userId);
+
+  if (hasReaction) {
+    course[targetField] = course[targetField].filter((entry) => entry.toString() !== userId);
+  } else {
+    course[targetField].push(userId);
+  }
+
+  await course.save();
+  return course;
+};
+
 // @desc    Get all courses
 // @route   GET /api/courses
 // @access  Public
@@ -200,6 +223,46 @@ export const getInstructorCourses = async (req, res) => {
     res.status(200).json({
       success: true,
       courses,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Toggle like on course
+// @route   POST /api/courses/:id/like
+// @access  Private
+export const likeCourse = async (req, res) => {
+  try {
+    const course = await toggleReaction(req.params.id, req.user.id, 'like');
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found' });
+    }
+
+    res.status(200).json({
+      success: true,
+      course,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Toggle dislike on course
+// @route   POST /api/courses/:id/dislike
+// @access  Private
+export const dislikeCourse = async (req, res) => {
+  try {
+    const course = await toggleReaction(req.params.id, req.user.id, 'dislike');
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found' });
+    }
+
+    res.status(200).json({
+      success: true,
+      course,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -62,7 +62,7 @@ export function Interviews() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
@@ -70,8 +70,8 @@ export function Interviews() {
               <Briefcase className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-1">Interview Experiences</h1>
-              <p className="text-gray-600">Share and learn from real interview experiences</p>
+              <h1 className="mb-1 text-3xl font-bold text-gray-900 dark:text-white">Interview Experiences</h1>
+              <p className="text-gray-600 dark:text-gray-300">Share and learn from real interview experiences</p>
             </div>
           </div>
 
@@ -125,7 +125,7 @@ export function Interviews() {
                   <Label htmlFor="difficulty">Difficulty</Label>
                   <select
                     id="difficulty"
-                    className="w-full mt-1.5 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1.5 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                     value={formData.difficulty}
                     onChange={(e) => setFormData({ ...formData, difficulty: e.target.value })}
                   >
@@ -134,7 +134,7 @@ export function Interviews() {
                     <option>Hard</option>
                   </select>
                 </div>
-                {error && <p className="text-red-600 text-sm">{error}</p>}
+                {error && <p className="text-sm text-red-600 dark:text-red-300">{error}</p>}
                 <button 
                   type="submit"
                   disabled={submitting}

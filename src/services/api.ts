@@ -111,6 +111,16 @@ class APIClient {
     return response.data;
   }
 
+  async likeCourse(id: string) {
+    const response = await this.client.post(`/courses/${id}/like`);
+    return response.data;
+  }
+
+  async dislikeCourse(id: string) {
+    const response = await this.client.post(`/courses/${id}/dislike`);
+    return response.data;
+  }
+
   // Lesson endpoints
   async getLessonsByCourse(courseId: string) {
     const response = await this.client.get(`/lessons/course/${courseId}`);
@@ -139,6 +149,16 @@ class APIClient {
 
   async deleteLesson(id: string) {
     const response = await this.client.delete(`/lessons/${id}`);
+    return response.data;
+  }
+
+  async likeLesson(id: string) {
+    const response = await this.client.post(`/lessons/${id}/like`);
+    return response.data;
+  }
+
+  async dislikeLesson(id: string) {
+    const response = await this.client.post(`/lessons/${id}/dislike`);
     return response.data;
   }
 

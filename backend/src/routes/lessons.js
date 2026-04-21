@@ -6,6 +6,8 @@ import {
   createLesson,
   updateLesson,
   deleteLesson,
+  likeLesson,
+  dislikeLesson,
 } from '../controllers/lessonController.js';
 import { protect } from '../middleware/auth.js';
 
@@ -18,5 +20,7 @@ router.get('/:id', getLesson);
 router.post('/', protect, createLesson);
 router.put('/:id', protect, updateLesson);
 router.delete('/:id', protect, deleteLesson);
+router.post('/:id/like', protect, likeLesson);
+router.post('/:id/dislike', protect, dislikeLesson);
 
 export default router;

@@ -7,7 +7,30 @@ const lessonPopulate = [
   { path: 'createdBy', select: 'name email profileImage role' },
 ];
 
-const canManageLesson = (lesson, course, user) => {
+const toggleReaction = async (lessonId, userId, reactionType) => {
+  const lesson = await Lesson.findById(lessonId);
+
+  if (!lesson) {
+    return null;
+  }
+
+  const targetField = reactionType === 'like' ? 'likes' : 'dislikes';
+  const oppositeField = reactionType === 'like' ? 'dislikes' : 'likes';
+  const hasReaction = lesson[targetField].some((entry) => entry.toString() === userId);
+
+  lesson[oppositeField] = lesson[oppositeField].filter((entry) => entry.toString() !== userId);
+
+  if (hasReaction) {
+    lesson[targetField] = lesson[targetField].filter((entry) => entry.toString() !== userId);
+  } else {
+    lesson[targetField].push(userId);
+  }
+
+  await lesson.save();
+  return lesson.populate(lessonPopulate);
+};
+
+const canUpdateLesson = (lesson, user) => {
   if (!lesson || !user) {
     return false;
   }
@@ -17,6 +40,22 @@ const canManageLesson = (lesson, course, user) => {
   }
 
   return lesson.createdBy?.toString() === user.id;
+};
+
+const canDeleteLesson = (lesson, course, user) => {
+  if (!lesson || !user) {
+    return false;
+  }
+
+  if (user.role === 'admin') {
+    return true;
+  }
+
+  if (lesson.createdBy?.toString() === user.id) {
+    return true;
+  }
+
+  return course?.instructor?.toString() === user.id;
 };
 
 // @desc    Get all lessons
@@ -132,7 +171,7 @@ export const updateLesson = async (req, res) => {
     const course = await Course.findById(lesson.course);
 
     // Check ownership
-    if (!canManageLesson(lesson, course, req.user)) {
+    if (!canUpdateLesson(lesson, req.user)) {
       return res.status(403).json({ message: 'Not authorized to update lesson' });
     }
 
@@ -164,7 +203,7 @@ export const deleteLesson = async (req, res) => {
     const course = await Course.findById(lesson.course);
 
     // Check ownership
-    if (!canManageLesson(lesson, course, req.user)) {
+    if (!canDeleteLesson(lesson, course, req.user)) {
       return res.status(403).json({ message: 'Not authorized to delete lesson' });
     }
 
@@ -177,6 +216,46 @@ export const deleteLesson = async (req, res) => {
     res.status(200).json({
       success: true,
       message: 'Lesson deleted',
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Toggle like on lesson
+// @route   POST /api/lessons/:id/like
+// @access  Private
+export const likeLesson = async (req, res) => {
+  try {
+    const lesson = await toggleReaction(req.params.id, req.user.id, 'like');
+
+    if (!lesson) {
+      return res.status(404).json({ message: 'Lesson not found' });
+    }
+
+    res.status(200).json({
+      success: true,
+      lesson,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Toggle dislike on lesson
+// @route   POST /api/lessons/:id/dislike
+// @access  Private
+export const dislikeLesson = async (req, res) => {
+  try {
+    const lesson = await toggleReaction(req.params.id, req.user.id, 'dislike');
+
+    if (!lesson) {
+      return res.status(404).json({ message: 'Lesson not found' });
+    }
+
+    res.status(200).json({
+      success: true,
+      lesson,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -101,12 +101,12 @@ export function Courses() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">All Courses</h1>
-            <p className="text-gray-600">Browse and discover courses from our community</p>
+            <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">All Courses</h1>
+            <p className="text-gray-600 dark:text-gray-300">Browse and discover courses from our community</p>
           </div>
 
           <Dialog open={open} onOpenChange={setOpen}>
@@ -208,7 +208,7 @@ export function Courses() {
           </Select>
         </div>
 
-        {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">{error}</div>}
+        {error && <div className="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700 dark:border-red-900/70 dark:bg-red-950/40 dark:text-red-300">{error}</div>}
 
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
